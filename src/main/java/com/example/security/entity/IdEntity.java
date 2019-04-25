@@ -32,11 +32,11 @@ public class IdEntity implements Serializable {
 	//@GenericGenerator(name = "idGenerator", strategy = "assigned")
 	private Long id;
 
-	private Long getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	private void setId(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

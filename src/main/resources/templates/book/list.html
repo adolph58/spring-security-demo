@@ -12,27 +12,27 @@
 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
     <button onclick="">添加</button>
 </div>
+
 <table border="1" cellspacing="0" style="width: 20%">
     <thead>
         <tr>
             <th>名称</th>
             <th>出版社</th>
             <th>价格</th>
-            <th>操作</th>
+            <th>根据 id 查看详情</th>
+            <th>根据书名查看详情</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Java从入门到放弃</td>
-            <td>机械工业出版社</td>
-            <td>39</td>
-            <td><span sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="/book/detail">查看</a></span></td>
-        </tr>
-        <tr>
-            <td>MySQ从删库到跑路</td>
-            <td>清华大学出版社</td>
-            <td>59</td>
-            <td><span sec:authorize="hasAuthority('ROLE_ADMIN')"><a href="/book/detail">查看</a></span></td>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.name}">深入理解 Nginx</td>
+            <td th:text="${book.publisher}">机械工业出版社</td>
+            <td th:text="${book.price}">99</td>
+            <!-- /book/detail/5 id 在路径中 -->
+            <td><span sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/book/detail/{id}(id=${book.id})}">查看详情</a></span></td>
+            <!-- /book/detail?name=Java 编程思想 常规方式 -->
+            <td><span sec:authorize="hasAuthority('ROLE_ADMIN')"><a th:href="@{/book/detail(name=${book.name})}">查看详情</a></span></td>
+
         </tr>
     </tbody>
 </table>

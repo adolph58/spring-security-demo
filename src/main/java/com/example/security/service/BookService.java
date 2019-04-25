@@ -16,6 +16,14 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
+    public Book findById(Long id) {
+        return bookRepository.findById(id).get();
+    }
+
+    public Book findByName(String name) {
+        return bookRepository.findByName(name);
+    }
+
     public List<Book> findAllBook() {
         return  bookRepository.findAll();
     }
