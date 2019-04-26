@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/book")
@@ -33,14 +34,14 @@ public class BookController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/detail/{id}")
-    public String detail(Model model, @PathVariable Long id) {
+    public String detail(Model model, @PathVariable("id") Long id) {
         model.addAttribute("book", bookService.findById(id));
         return "book/detail";
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/detail")
-    public String detail(Model model, String name) {
+    public String detail(Model model, @RequestParam("name") String name) {
         model.addAttribute("book", bookService.findByName(name));
         return "book/detail";
     }
